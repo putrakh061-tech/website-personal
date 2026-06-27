@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Implementasi Hill Cipher</title>
+
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<header class="navbar">
+
+<div class="container nav-container">
+
+<a href="index.html" class="logo">
+PKH
+</a>
+
+</div>
+
+</header>
+
+
+<section class="section">
+
+<div class="container">
+
+<h1 class="section-title">
+
+Implementasi Hill Cipher
+
+</h1>
+
+<p style="text-align:center;">
+
+Program ini merupakan implementasi algoritma
+Hill Cipher menggunakan Python.
+
+Pada halaman ini Anda dapat mencoba
+proses enkripsi dan dekripsi secara langsung.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<section class="section section-alt">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Demo Hill Cipher
+
+</h2>
+
+
+<label>
+
+Plaintext
+
+</label>
+
+<input
+type="text"
+id="plain"
+placeholder="Masukkan plaintext">
+
+
+<br><br>
+
+
+<button
+class="btn btn-primary"
+onclick="encrypt()">
+
+Encrypt
+
+</button>
+
+
+<br><br>
+
+<label>
+
+Ciphertext
+
+</label>
+
+<input
+type="text"
+id="cipher"
+readonly>
+
+<br><br>
+
+<button
+class="btn btn-outline"
+onclick="decrypt()">
+
+Decrypt
+
+</button>
+
+<br><br>
+
+<label>
+
+Hasil Dekripsi
+
+</label>
+
+<input
+type="text"
+id="hasil"
+readonly>
+
+</div>
+
+</section>
+
+
+
+<section class="section">
+
+<div class="container">
+
+<h2 class="section-title">
+
+Source Code Python
+
+</h2>
+
+<pre
+style="
+background:#111827;
+padding:20px;
+border-radius:12px;
+overflow:auto;
+color:#00ff99;
+">
+
+import numpy as np
+
+from math import gcd
+
+...
+
+def encrypt(plaintext,K):
+
+...
+
+def decrypt(ciphertext,K):
+
+...
+
+</pre>
+
+<br>
+
+<a
+
+href="hillchiper.py"
+
+download
+
+class="btn btn-primary">
+
+Download hillchiper.py
+
+</a>
+
+<br><br>
+
+<a
+
+href="index.html"
+
+class="btn btn-outline">
+
+Kembali ke Beranda
+
+</a>
+
+</div>
+
+</section>
+
+
+
+<script>
+
+const key = [
+
+[3,3],
+
+[2,5]
+
+];
+
+const inv = [
+
+[15,17],
+
+[20,9]
+
+];
+
+function textToNumbers(text){
+
+text=text.toUpperCase().replace(/[^A-Z]/g,'');
+
+let arr=[];
+
+for(let i=0;i<text.length;i++){
+
+arr.push(text.charCodeAt(i)-65);
+
+}
+
+while(arr.length%2!==0)
+
+arr.push(23);
+
+return arr;
+
+}
+
+function numbersToText(arr){
+
+return arr.map(n=>String.fromCharCode((n%26)+65)).join('');
+
+}
+
+function encrypt(){
+
+let nums=textToNumbers(
+
+document.getElementById("plain").value
+
+);
+
+let hasil=[];
+
+for(let i=0;i<nums.length;i+=2){
+
+let a=nums[i];
+
+let b=nums[i+1];
+
+hasil.push((3*a+3*b)%26);
+
+hasil.push((2*a+5*b)%26);
+
+}
+
+document.getElementById("cipher").value=
+
+numbersToText(hasil);
+
+}
+
+function decrypt(){
+
+let nums=textToNumbers(
+
+document.getElementById("cipher").value
+
+);
+
+let hasil=[];
+
+for(let i=0;i<nums.length;i+=2){
+
+let a=nums[i];
+
+let b=nums[i+1];
+
+hasil.push((15*a+17*b)%26);
+
+hasil.push((20*a+9*b)%26);
+
+}
+
+document.getElementById("hasil").value=
+
+numbersToText(hasil);
+
+}
+
+</script>
+
+</body>
+
+</html>
